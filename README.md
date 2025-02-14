@@ -9,5 +9,5 @@ Este es el repositorio para la asignatura **Procesamiento de Lenguajes** en la u
 
 - **Nombre:** Mikel Gonzalez Rodriguez  
 - **ID:** E12427  
-- **Foto:** *![image](https://github.com/user-attachments/assets/2ad17046-648b-45af-845e-d093f9c95c90)*
+- **Foto:** ![DeWatermark ai_1739556697085](https://github.com/user-attachments/assets/a8f2e7a4-3b17-4400-9168-31479b35317b)**
 
