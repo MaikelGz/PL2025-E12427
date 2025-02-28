@@ -40,4 +40,4 @@ El programa sigue las siguientes etapas:
 - **Nombre:** Mikel Gonzalez Rodriguez  
 - **ID:** E12427  
 - **Foto:**  
-  ![DeWatermark ai_1739556697085](https://github.com/user-attachments/assets/a8f2e7a4-3b17-4400-9168-31479b35317b)
+![FotoDNI](https://github.com/user-attachments/assets/89f3adbe-49b9-4930-808f-9d0bc81bcb00)
