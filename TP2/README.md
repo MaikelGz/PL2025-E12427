@@ -1,4 +1,4 @@
-# TPC2 - Análise de um dataset de obras musicais 
+# TPC2 - Analisis de un dataset de obras musicais 
 
 ## Descripción
 Este programa analiza un dataset que contiene información sobre obras musicales. Procesa los datos para generar:
