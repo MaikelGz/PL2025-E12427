@@ -13,11 +13,11 @@ Para garantizar un procesamiento correcto, está prohibido el uso del módulo `c
 ## Ejecución
 Para ejecutar el programa, asegúrate de que los siguientes archivos estén en la misma carpeta:
 - Un archivo `obras.csv` que contenga los datos de las obras musicales.
-- El script `analisis_obras.py`.
+- El script `TP2.py`.
 
 Ejecuta el programa con el siguiente comando:
 ```sh
-$ python analisis_obras.py
+$ python TP2.py
 ```
 
 El resultado del análisis se guardará en el archivo `resultado.txt`.
