@@ -12,7 +12,7 @@ Para ejecutar el programa, asegúrate de que en la misma carpeta se encuentran:
 
 Ejecuta el programa con el siguiente comando:
 ```sh
-$ python sumador.py
+$ python TP1.py
 ```
 
 ---
