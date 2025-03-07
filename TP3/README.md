@@ -16,7 +16,7 @@ El archivo de entrada debe estar correctamente formateado para garantizar una co
 ## Ejecución
 Para ejecutar el programa, asegúrate de que los siguientes archivos estén en la misma carpeta:
 - Un archivo `entrada.md` que contenga el texto en formato Markdown.
-- El script `TP3	.py`.
+- El script `TP3.py`.
 
 Ejecuta el programa con el siguiente comando:
 ```sh
