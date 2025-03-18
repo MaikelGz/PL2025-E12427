@@ -40,6 +40,40 @@ El programa sigue las siguientes etapas:
 7. **Escritura del resultado**: Se guardan los tokens en `resultado.txt`.
 
 ---
+## Resultados
+
+A continuación se muestran los resultados obtenidos al ejecutar el analizador léxico:
+
+| Token  | Valor               | Línea |
+|--------|---------------------|-------|
+| SELECT | select              | 32    |
+| VAR    | ?nome               | 39    |
+| VAR    | ?desc               | 45    |
+| WHERE  | where               | 51    |
+| LBRACE | {                   | 57    |
+| VAR    | ?s                  | 60    |
+| TYPE   | a                   | 63    |
+| IRI    | dbo:MusicalArtist   | 65    |
+| DOT    | .                   | 82    |
+| VAR    | ?s                  | 85    |
+| IRI    | foaf:name           | 88    |
+| STRING | "Chuck Berry"@en    | 98    |
+| DOT    | .                   | 115   |
+| VAR    | ?w                  | 118   |
+| IRI    | dbo:artist          | 121   |
+| VAR    | ?s                  | 132   |
+| DOT    | .                   | 134   |
+| VAR    | ?w                  | 137   |
+| IRI    | foaf:name           | 140   |
+| VAR    | ?nome               | 150   |
+| DOT    | .                   | 155   |
+| VAR    | ?w                  | 158   |
+| IRI    | dbo:abstract        | 161   |
+| VAR    | ?desc               | 174   |
+| RBRACE | }                   | 180   |
+| VAR    | LIMIT               | 182   |
+| NUMBER | 1000                | 188   |
+---
 
 ## Autor
 - **Nombre:** Mikel Gonzalez Rodriguez  
