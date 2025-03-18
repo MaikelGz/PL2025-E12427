@@ -76,7 +76,7 @@ def main():
     
     with open("resultado.txt", "w", encoding="utf-8") as output_file:
         for tok in lexer:
-            output_file.write(f"{tok.type}, {tok.value}, {tok.lineno}, {tok.lexpos}\n")
+            output_file.write(f"{tok.type}, {tok.value}, {tok.lexpos}\n")
 
 if __name__ == "__main__":
     main()
