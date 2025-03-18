@@ -44,7 +44,7 @@ El programa sigue las siguientes etapas:
 
 A continuación se muestran los resultados obtenidos al ejecutar el analizador léxico:
 
-| Token  | Valor               | Línea |
+| Token  | Valor               | posición del token  |
 |--------|---------------------|-------|
 | SELECT | select              | 32    |
 | VAR    | ?nome               | 39    |
