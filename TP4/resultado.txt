@@ -1,27 +1,28 @@
-SELECT, select, 1, 32
-VAR, ?nome, 1, 39
-VAR, ?desc, 1, 45
-WHERE, where, 1, 51
-LBRACE, {, 1, 57
-VAR, ?s, 1, 60
-TYPE, a, 1, 63
-IRI, dbo:MusicalArtist, 1, 65
-DOT, ., 1, 82
-VAR, ?s, 1, 85
-IRI, foaf:name, 1, 88
-STRING, "Chuck Berry"@en, 1, 98
-DOT, ., 1, 115
-VAR, ?w, 1, 118
-IRI, dbo:artist, 1, 121
-VAR, ?s, 1, 132
-DOT, ., 1, 134
-VAR, ?w, 1, 137
-IRI, foaf:name, 1, 140
-VAR, ?nome, 1, 150
-DOT, ., 1, 155
-VAR, ?w, 1, 158
-IRI, dbo:abstract, 1, 161
-VAR, ?desc, 1, 174
-RBRACE, }, 1, 180
-VAR, LIMIT, 1, 182
-NUMBER, 1000, 1, 188
+SELECT, select, 32
+VAR, ?nome, 39
+VAR, ?desc, 45
+WHERE, where, 51
+LBRACE, {, 57
+VAR, ?s, 60
+TYPE, a, 63
+IRI, dbo:MusicalArtist, 65
+DOT, ., 82
+VAR, ?s, 85
+IRI, foaf:name, 88
+STRING, "Chuck Berry"@en, 98
+DOT, ., 115
+VAR, ?w, 118
+IRI, dbo:artist, 121
+VAR, ?s, 132
+DOT, ., 134
+VAR, ?w, 137
+IRI, foaf:name, 140
+VAR, ?nome, 150
+DOT, ., 155
+VAR, ?w, 158
+IRI, dbo:abstract, 161
+VAR, ?desc, 174
+RBRACE, }, 180
+VAR, LIMIT, 182
+NUMBER, 1000, 188
+
