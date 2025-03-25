@@ -1,0 +1,32 @@
+[
+    {
+        "cod": "A23",
+        "nombre": "Agua 0.5L",
+        "quant": 6,
+        "precio": 0.7
+    },
+    {
+        "cod": "B15",
+        "nombre": "Jugo de naranja",
+        "quant": 5,
+        "precio": 1.2
+    },
+    {
+        "cod": "C09",
+        "nombre": "Barra de chocolate",
+        "quant": 15,
+        "precio": 0.9
+    },
+    {
+        "cod": "D44",
+        "nombre": "Papas fritas",
+        "quant": 5,
+        "precio": 1.0
+    },
+    {
+        "cod": "E32",
+        "nombre": "Galletas María",
+        "quant": 20,
+        "precio": 0.5
+    }
+]
