@@ -1,9 +1,7 @@
 import ply.lex as lex
 
-# Definir os tokens
 tokens = ('NUMBER', 'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'LPAREN', 'RPAREN')
 
-# Expressões regulares para tokens simples
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
@@ -15,17 +13,14 @@ def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
     return t
-
-# Ignorar espaços e tabs
+    
 t_ignore = ' \t'
 
-# Tratamento de erros
 def t_error(t):
     raise SyntaxError(f"Illegal character '{t.value[0]}'")
 
 lexer = lex.lex()
 
-# Parser LL(1) recursivo descendente
 class Parser:
     def __init__(self, lexer):
         self.lexer = lexer
@@ -83,7 +78,6 @@ class Parser:
         else:
             raise SyntaxError(f"Unexpected token '{token.type}'")
 
-# Testar o parser
 parser = Parser(lexer)
 
 examples = ["2+3", "67-(2+3*4)", "(9-2)*(13-4)"]
