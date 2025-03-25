@@ -17,7 +17,7 @@ def t_NUMBER(t):
 t_ignore = ' \t'
 
 def t_error(t):
-    raise SyntaxError(f"Illegal character '{t.value[0]}'")
+    raise SyntaxError(f"Caracter Ilegal '{t.value[0]}'")
 
 lexer = lex.lex()
 
