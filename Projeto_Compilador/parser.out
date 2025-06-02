@@ -1,0 +1,2762 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM ID SEMI block DOT
+Rule 2     block -> declarations BEGIN statements_body END
+Rule 3     block -> BEGIN statements_body END
+Rule 4     declarations -> VAR var_declaration_list_nonempty
+Rule 5     declarations -> empty_decl_tag
+Rule 6     empty_decl_tag -> <empty>
+Rule 7     var_declaration_list_nonempty -> var_declaration SEMI
+Rule 8     var_declaration_list_nonempty -> var_declaration SEMI var_declaration_list_nonempty
+Rule 9     var_declaration -> id_list COLON type
+Rule 10    type -> basic_type
+Rule 11    type -> array_type
+Rule 12    basic_type -> INTEGER
+Rule 13    basic_type -> BOOLEAN
+Rule 14    array_type -> ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF type
+Rule 15    id_list -> ID
+Rule 16    id_list -> ID COMMA id_list
+Rule 17    statements_body -> statement_sequence
+Rule 18    statements_body -> empty_stmt_node
+Rule 19    statement_sequence -> statement
+Rule 20    statement_sequence -> statement SEMI statement_sequence
+Rule 21    empty_stmt_node -> <empty>
+Rule 22    statement -> writeln_stmt
+Rule 23    statement -> write_stmt
+Rule 24    statement -> readln_stmt
+Rule 25    statement -> assign_stmt
+Rule 26    statement -> for_loop
+Rule 27    statement -> if_stmt
+Rule 28    statement -> while_loop
+Rule 29    statement -> block
+Rule 30    statement -> empty_stmt_node
+Rule 31    writeln_stmt -> WRITELN LPAREN expr_list RPAREN
+Rule 32    write_stmt -> WRITE LPAREN expr_list RPAREN
+Rule 33    readln_stmt -> READLN LPAREN variable_list RPAREN
+Rule 34    assign_stmt -> variable ASSIGN expression
+Rule 35    for_loop -> FOR ID ASSIGN expression TO expression DO statement
+Rule 36    if_stmt -> IF condition THEN statement else_clause
+Rule 37    else_clause -> ELSE statement
+Rule 38    else_clause -> empty_stmt_node
+Rule 39    while_loop -> WHILE condition DO statement
+Rule 40    variable -> ID
+Rule 41    variable -> ID LSQUARE expression RSQUARE
+Rule 42    variable_list -> variable
+Rule 43    variable_list -> variable COMMA variable_list
+Rule 44    expr_list -> expr
+Rule 45    expr_list -> expr COMMA expr_list
+Rule 46    expr -> STRING_LITERAL
+Rule 47    expr -> expression
+Rule 48    expression -> expression PLUS expression
+Rule 49    expression -> expression MINUS expression
+Rule 50    expression -> expression MULT expression
+Rule 51    expression -> expression DIV expression
+Rule 52    expression -> expression MOD expression
+Rule 53    expression -> LPAREN expression RPAREN
+Rule 54    expression -> factor
+Rule 55    factor -> NUMBER
+Rule 56    factor -> variable
+Rule 57    factor -> TRUE
+Rule 58    factor -> FALSE
+Rule 59    condition -> condition AND condition
+Rule 60    condition -> condition OR condition
+Rule 61    condition -> expression GT expression
+Rule 62    condition -> expression LT expression
+Rule 63    condition -> expression GE expression
+Rule 64    condition -> expression LE expression
+Rule 65    condition -> expression EQ expression
+Rule 66    condition -> expression NE expression
+Rule 67    condition -> LPAREN condition RPAREN
+Rule 68    condition -> expression
+
+Terminals, with rules where they appear
+
+AND                  : 59
+ARRAY                : 14
+ASSIGN               : 34 35
+BEGIN                : 2 3
+BOOLEAN              : 13
+COLON                : 9
+COMMA                : 16 43 45
+DIV                  : 51
+DO                   : 35 39
+DOT                  : 1
+DOTDOT               : 14
+ELSE                 : 37
+END                  : 2 3
+EQ                   : 65
+FALSE                : 58
+FOR                  : 35
+GE                   : 63
+GT                   : 61
+ID                   : 1 15 16 35 40 41
+IF                   : 36
+INTEGER              : 12
+LE                   : 64
+LPAREN               : 31 32 33 53 67
+LSQUARE              : 14 41
+LT                   : 62
+MINUS                : 49
+MOD                  : 52
+MULT                 : 50
+NE                   : 66
+NUMBER               : 14 14 55
+OF                   : 14
+OR                   : 60
+PLUS                 : 48
+PROGRAM              : 1
+READLN               : 33
+RPAREN               : 31 32 33 53 67
+RSQUARE              : 14 41
+SEMI                 : 1 7 8 20
+STRING_LITERAL       : 46
+THEN                 : 36
+TO                   : 35
+TRUE                 : 57
+VAR                  : 4
+WHILE                : 39
+WRITE                : 32
+WRITELN              : 31
+error                : 
+
+Nonterminals, with rules where they appear
+
+array_type           : 11
+assign_stmt          : 25
+basic_type           : 10
+block                : 1 29
+condition            : 36 39 59 59 60 60 67
+declarations         : 2
+else_clause          : 36
+empty_decl_tag       : 5
+empty_stmt_node      : 18 30 38
+expr                 : 44 45
+expr_list            : 31 32 45
+expression           : 34 35 35 41 47 48 48 49 49 50 50 51 51 52 52 53 61 61 62 62 63 63 64 64 65 65 66 66 68
+factor               : 54
+for_loop             : 26
+id_list              : 9 16
+if_stmt              : 27
+program              : 0
+readln_stmt          : 24
+statement            : 19 20 35 36 37 39
+statement_sequence   : 17 20
+statements_body      : 2 3
+type                 : 9 14
+var_declaration      : 7 8
+var_declaration_list_nonempty : 4 8
+variable             : 34 42 43 56
+variable_list        : 33 43
+while_loop           : 28
+write_stmt           : 23
+writeln_stmt         : 22
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM ID SEMI block DOT
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . ID SEMI block DOT
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM ID . SEMI block DOT
+
+    SEMI            shift and go to state 4
+
+
+state 4
+
+    (1) program -> PROGRAM ID SEMI . block DOT
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    BEGIN           shift and go to state 7
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    block                          shift and go to state 5
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 5
+
+    (1) program -> PROGRAM ID SEMI block . DOT
+
+    DOT             shift and go to state 10
+
+
+state 6
+
+    (2) block -> declarations . BEGIN statements_body END
+
+    BEGIN           shift and go to state 11
+
+
+state 7
+
+    (3) block -> BEGIN . statements_body END
+    (17) statements_body -> . statement_sequence
+    (18) statements_body -> . empty_stmt_node
+    (19) statement_sequence -> . statement
+    (20) statement_sequence -> . statement SEMI statement_sequence
+    (21) empty_stmt_node -> .
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    statements_body                shift and go to state 12
+    statement_sequence             shift and go to state 13
+    empty_stmt_node                shift and go to state 14
+    statement                      shift and go to state 15
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    variable                       shift and go to state 27
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 8
+
+    (4) declarations -> VAR . var_declaration_list_nonempty
+    (7) var_declaration_list_nonempty -> . var_declaration SEMI
+    (8) var_declaration_list_nonempty -> . var_declaration SEMI var_declaration_list_nonempty
+    (9) var_declaration -> . id_list COLON type
+    (15) id_list -> . ID
+    (16) id_list -> . ID COMMA id_list
+
+    ID              shift and go to state 35
+
+    var_declaration_list_nonempty  shift and go to state 32
+    var_declaration                shift and go to state 33
+    id_list                        shift and go to state 34
+
+state 9
+
+    (5) declarations -> empty_decl_tag .
+
+    BEGIN           reduce using rule 5 (declarations -> empty_decl_tag .)
+
+
+state 10
+
+    (1) program -> PROGRAM ID SEMI block DOT .
+
+    $end            reduce using rule 1 (program -> PROGRAM ID SEMI block DOT .)
+
+
+state 11
+
+    (2) block -> declarations BEGIN . statements_body END
+    (17) statements_body -> . statement_sequence
+    (18) statements_body -> . empty_stmt_node
+    (19) statement_sequence -> . statement
+    (20) statement_sequence -> . statement SEMI statement_sequence
+    (21) empty_stmt_node -> .
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    declarations                   shift and go to state 6
+    statements_body                shift and go to state 36
+    statement_sequence             shift and go to state 13
+    empty_stmt_node                shift and go to state 14
+    statement                      shift and go to state 15
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    variable                       shift and go to state 27
+    empty_decl_tag                 shift and go to state 9
+
+state 12
+
+    (3) block -> BEGIN statements_body . END
+
+    END             shift and go to state 37
+
+
+state 13
+
+    (17) statements_body -> statement_sequence .
+
+    END             reduce using rule 17 (statements_body -> statement_sequence .)
+
+
+state 14
+
+    (18) statements_body -> empty_stmt_node .
+    (30) statement -> empty_stmt_node .
+
+  ! reduce/reduce conflict for END resolved using rule 18 (statements_body -> empty_stmt_node .)
+    END             reduce using rule 18 (statements_body -> empty_stmt_node .)
+    SEMI            reduce using rule 30 (statement -> empty_stmt_node .)
+
+  ! END             [ reduce using rule 30 (statement -> empty_stmt_node .) ]
+
+
+state 15
+
+    (19) statement_sequence -> statement .
+    (20) statement_sequence -> statement . SEMI statement_sequence
+
+    END             reduce using rule 19 (statement_sequence -> statement .)
+    SEMI            shift and go to state 38
+
+
+state 16
+
+    (22) statement -> writeln_stmt .
+
+    SEMI            reduce using rule 22 (statement -> writeln_stmt .)
+    END             reduce using rule 22 (statement -> writeln_stmt .)
+    ELSE            reduce using rule 22 (statement -> writeln_stmt .)
+
+
+state 17
+
+    (23) statement -> write_stmt .
+
+    SEMI            reduce using rule 23 (statement -> write_stmt .)
+    END             reduce using rule 23 (statement -> write_stmt .)
+    ELSE            reduce using rule 23 (statement -> write_stmt .)
+
+
+state 18
+
+    (24) statement -> readln_stmt .
+
+    SEMI            reduce using rule 24 (statement -> readln_stmt .)
+    END             reduce using rule 24 (statement -> readln_stmt .)
+    ELSE            reduce using rule 24 (statement -> readln_stmt .)
+
+
+state 19
+
+    (25) statement -> assign_stmt .
+
+    SEMI            reduce using rule 25 (statement -> assign_stmt .)
+    END             reduce using rule 25 (statement -> assign_stmt .)
+    ELSE            reduce using rule 25 (statement -> assign_stmt .)
+
+
+state 20
+
+    (26) statement -> for_loop .
+
+    SEMI            reduce using rule 26 (statement -> for_loop .)
+    END             reduce using rule 26 (statement -> for_loop .)
+    ELSE            reduce using rule 26 (statement -> for_loop .)
+
+
+state 21
+
+    (27) statement -> if_stmt .
+
+    SEMI            reduce using rule 27 (statement -> if_stmt .)
+    END             reduce using rule 27 (statement -> if_stmt .)
+    ELSE            reduce using rule 27 (statement -> if_stmt .)
+
+
+state 22
+
+    (28) statement -> while_loop .
+
+    SEMI            reduce using rule 28 (statement -> while_loop .)
+    END             reduce using rule 28 (statement -> while_loop .)
+    ELSE            reduce using rule 28 (statement -> while_loop .)
+
+
+state 23
+
+    (29) statement -> block .
+
+    SEMI            reduce using rule 29 (statement -> block .)
+    END             reduce using rule 29 (statement -> block .)
+    ELSE            reduce using rule 29 (statement -> block .)
+
+
+state 24
+
+    (31) writeln_stmt -> WRITELN . LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 39
+
+
+state 25
+
+    (32) write_stmt -> WRITE . LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 40
+
+
+state 26
+
+    (33) readln_stmt -> READLN . LPAREN variable_list RPAREN
+
+    LPAREN          shift and go to state 41
+
+
+state 27
+
+    (34) assign_stmt -> variable . ASSIGN expression
+
+    ASSIGN          shift and go to state 42
+
+
+state 28
+
+    (35) for_loop -> FOR . ID ASSIGN expression TO expression DO statement
+
+    ID              shift and go to state 43
+
+
+state 29
+
+    (40) variable -> ID .
+    (41) variable -> ID . LSQUARE expression RSQUARE
+
+    ASSIGN          reduce using rule 40 (variable -> ID .)
+    GT              reduce using rule 40 (variable -> ID .)
+    LT              reduce using rule 40 (variable -> ID .)
+    GE              reduce using rule 40 (variable -> ID .)
+    LE              reduce using rule 40 (variable -> ID .)
+    EQ              reduce using rule 40 (variable -> ID .)
+    NE              reduce using rule 40 (variable -> ID .)
+    PLUS            reduce using rule 40 (variable -> ID .)
+    MINUS           reduce using rule 40 (variable -> ID .)
+    MULT            reduce using rule 40 (variable -> ID .)
+    DIV             reduce using rule 40 (variable -> ID .)
+    MOD             reduce using rule 40 (variable -> ID .)
+    THEN            reduce using rule 40 (variable -> ID .)
+    AND             reduce using rule 40 (variable -> ID .)
+    OR              reduce using rule 40 (variable -> ID .)
+    DO              reduce using rule 40 (variable -> ID .)
+    COMMA           reduce using rule 40 (variable -> ID .)
+    RPAREN          reduce using rule 40 (variable -> ID .)
+    SEMI            reduce using rule 40 (variable -> ID .)
+    END             reduce using rule 40 (variable -> ID .)
+    ELSE            reduce using rule 40 (variable -> ID .)
+    RSQUARE         reduce using rule 40 (variable -> ID .)
+    TO              reduce using rule 40 (variable -> ID .)
+    LSQUARE         shift and go to state 44
+
+
+state 30
+
+    (36) if_stmt -> IF . condition THEN statement else_clause
+    (59) condition -> . condition AND condition
+    (60) condition -> . condition OR condition
+    (61) condition -> . expression GT expression
+    (62) condition -> . expression LT expression
+    (63) condition -> . expression GE expression
+    (64) condition -> . expression LE expression
+    (65) condition -> . expression EQ expression
+    (66) condition -> . expression NE expression
+    (67) condition -> . LPAREN condition RPAREN
+    (68) condition -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    condition                      shift and go to state 45
+    expression                     shift and go to state 46
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 31
+
+    (39) while_loop -> WHILE . condition DO statement
+    (59) condition -> . condition AND condition
+    (60) condition -> . condition OR condition
+    (61) condition -> . expression GT expression
+    (62) condition -> . expression LT expression
+    (63) condition -> . expression GE expression
+    (64) condition -> . expression LE expression
+    (65) condition -> . expression EQ expression
+    (66) condition -> . expression NE expression
+    (67) condition -> . LPAREN condition RPAREN
+    (68) condition -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    condition                      shift and go to state 53
+    expression                     shift and go to state 46
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 32
+
+    (4) declarations -> VAR var_declaration_list_nonempty .
+
+    BEGIN           reduce using rule 4 (declarations -> VAR var_declaration_list_nonempty .)
+
+
+state 33
+
+    (7) var_declaration_list_nonempty -> var_declaration . SEMI
+    (8) var_declaration_list_nonempty -> var_declaration . SEMI var_declaration_list_nonempty
+
+    SEMI            shift and go to state 54
+
+
+state 34
+
+    (9) var_declaration -> id_list . COLON type
+
+    COLON           shift and go to state 55
+
+
+state 35
+
+    (15) id_list -> ID .
+    (16) id_list -> ID . COMMA id_list
+
+    COLON           reduce using rule 15 (id_list -> ID .)
+    COMMA           shift and go to state 56
+
+
+state 36
+
+    (2) block -> declarations BEGIN statements_body . END
+
+    END             shift and go to state 57
+
+
+state 37
+
+    (3) block -> BEGIN statements_body END .
+
+    DOT             reduce using rule 3 (block -> BEGIN statements_body END .)
+    SEMI            reduce using rule 3 (block -> BEGIN statements_body END .)
+    END             reduce using rule 3 (block -> BEGIN statements_body END .)
+    ELSE            reduce using rule 3 (block -> BEGIN statements_body END .)
+
+
+state 38
+
+    (20) statement_sequence -> statement SEMI . statement_sequence
+    (19) statement_sequence -> . statement
+    (20) statement_sequence -> . statement SEMI statement_sequence
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (21) empty_stmt_node -> .
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    statement                      shift and go to state 15
+    statement_sequence             shift and go to state 58
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    empty_stmt_node                shift and go to state 59
+    variable                       shift and go to state 27
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 39
+
+    (31) writeln_stmt -> WRITELN LPAREN . expr_list RPAREN
+    (44) expr_list -> . expr
+    (45) expr_list -> . expr COMMA expr_list
+    (46) expr -> . STRING_LITERAL
+    (47) expr -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    STRING_LITERAL  shift and go to state 63
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expr_list                      shift and go to state 61
+    expr                           shift and go to state 62
+    expression                     shift and go to state 64
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 40
+
+    (32) write_stmt -> WRITE LPAREN . expr_list RPAREN
+    (44) expr_list -> . expr
+    (45) expr_list -> . expr COMMA expr_list
+    (46) expr -> . STRING_LITERAL
+    (47) expr -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    STRING_LITERAL  shift and go to state 63
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expr_list                      shift and go to state 65
+    expr                           shift and go to state 62
+    expression                     shift and go to state 64
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 41
+
+    (33) readln_stmt -> READLN LPAREN . variable_list RPAREN
+    (42) variable_list -> . variable
+    (43) variable_list -> . variable COMMA variable_list
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    ID              shift and go to state 29
+
+    variable_list                  shift and go to state 66
+    variable                       shift and go to state 67
+
+state 42
+
+    (34) assign_stmt -> variable ASSIGN . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    variable                       shift and go to state 50
+    expression                     shift and go to state 68
+    factor                         shift and go to state 48
+
+state 43
+
+    (35) for_loop -> FOR ID . ASSIGN expression TO expression DO statement
+
+    ASSIGN          shift and go to state 69
+
+
+state 44
+
+    (41) variable -> ID LSQUARE . expression RSQUARE
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 70
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 45
+
+    (36) if_stmt -> IF condition . THEN statement else_clause
+    (59) condition -> condition . AND condition
+    (60) condition -> condition . OR condition
+
+    THEN            shift and go to state 71
+    AND             shift and go to state 72
+    OR              shift and go to state 73
+
+
+state 46
+
+    (61) condition -> expression . GT expression
+    (62) condition -> expression . LT expression
+    (63) condition -> expression . GE expression
+    (64) condition -> expression . LE expression
+    (65) condition -> expression . EQ expression
+    (66) condition -> expression . NE expression
+    (68) condition -> expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    GT              shift and go to state 74
+    LT              shift and go to state 75
+    GE              shift and go to state 76
+    LE              shift and go to state 77
+    EQ              shift and go to state 78
+    NE              shift and go to state 79
+    THEN            reduce using rule 68 (condition -> expression .)
+    AND             reduce using rule 68 (condition -> expression .)
+    OR              reduce using rule 68 (condition -> expression .)
+    DO              reduce using rule 68 (condition -> expression .)
+    RPAREN          reduce using rule 68 (condition -> expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 47
+
+    (67) condition -> LPAREN . condition RPAREN
+    (53) expression -> LPAREN . expression RPAREN
+    (59) condition -> . condition AND condition
+    (60) condition -> . condition OR condition
+    (61) condition -> . expression GT expression
+    (62) condition -> . expression LT expression
+    (63) condition -> . expression GE expression
+    (64) condition -> . expression LE expression
+    (65) condition -> . expression EQ expression
+    (66) condition -> . expression NE expression
+    (67) condition -> . LPAREN condition RPAREN
+    (68) condition -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    condition                      shift and go to state 85
+    expression                     shift and go to state 86
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 48
+
+    (54) expression -> factor .
+
+    GT              reduce using rule 54 (expression -> factor .)
+    LT              reduce using rule 54 (expression -> factor .)
+    GE              reduce using rule 54 (expression -> factor .)
+    LE              reduce using rule 54 (expression -> factor .)
+    EQ              reduce using rule 54 (expression -> factor .)
+    NE              reduce using rule 54 (expression -> factor .)
+    PLUS            reduce using rule 54 (expression -> factor .)
+    MINUS           reduce using rule 54 (expression -> factor .)
+    MULT            reduce using rule 54 (expression -> factor .)
+    DIV             reduce using rule 54 (expression -> factor .)
+    MOD             reduce using rule 54 (expression -> factor .)
+    THEN            reduce using rule 54 (expression -> factor .)
+    AND             reduce using rule 54 (expression -> factor .)
+    OR              reduce using rule 54 (expression -> factor .)
+    DO              reduce using rule 54 (expression -> factor .)
+    COMMA           reduce using rule 54 (expression -> factor .)
+    RPAREN          reduce using rule 54 (expression -> factor .)
+    SEMI            reduce using rule 54 (expression -> factor .)
+    END             reduce using rule 54 (expression -> factor .)
+    ELSE            reduce using rule 54 (expression -> factor .)
+    RSQUARE         reduce using rule 54 (expression -> factor .)
+    TO              reduce using rule 54 (expression -> factor .)
+
+
+state 49
+
+    (55) factor -> NUMBER .
+
+    GT              reduce using rule 55 (factor -> NUMBER .)
+    LT              reduce using rule 55 (factor -> NUMBER .)
+    GE              reduce using rule 55 (factor -> NUMBER .)
+    LE              reduce using rule 55 (factor -> NUMBER .)
+    EQ              reduce using rule 55 (factor -> NUMBER .)
+    NE              reduce using rule 55 (factor -> NUMBER .)
+    PLUS            reduce using rule 55 (factor -> NUMBER .)
+    MINUS           reduce using rule 55 (factor -> NUMBER .)
+    MULT            reduce using rule 55 (factor -> NUMBER .)
+    DIV             reduce using rule 55 (factor -> NUMBER .)
+    MOD             reduce using rule 55 (factor -> NUMBER .)
+    THEN            reduce using rule 55 (factor -> NUMBER .)
+    AND             reduce using rule 55 (factor -> NUMBER .)
+    OR              reduce using rule 55 (factor -> NUMBER .)
+    DO              reduce using rule 55 (factor -> NUMBER .)
+    COMMA           reduce using rule 55 (factor -> NUMBER .)
+    RPAREN          reduce using rule 55 (factor -> NUMBER .)
+    SEMI            reduce using rule 55 (factor -> NUMBER .)
+    END             reduce using rule 55 (factor -> NUMBER .)
+    ELSE            reduce using rule 55 (factor -> NUMBER .)
+    RSQUARE         reduce using rule 55 (factor -> NUMBER .)
+    TO              reduce using rule 55 (factor -> NUMBER .)
+
+
+state 50
+
+    (56) factor -> variable .
+
+    GT              reduce using rule 56 (factor -> variable .)
+    LT              reduce using rule 56 (factor -> variable .)
+    GE              reduce using rule 56 (factor -> variable .)
+    LE              reduce using rule 56 (factor -> variable .)
+    EQ              reduce using rule 56 (factor -> variable .)
+    NE              reduce using rule 56 (factor -> variable .)
+    PLUS            reduce using rule 56 (factor -> variable .)
+    MINUS           reduce using rule 56 (factor -> variable .)
+    MULT            reduce using rule 56 (factor -> variable .)
+    DIV             reduce using rule 56 (factor -> variable .)
+    MOD             reduce using rule 56 (factor -> variable .)
+    THEN            reduce using rule 56 (factor -> variable .)
+    AND             reduce using rule 56 (factor -> variable .)
+    OR              reduce using rule 56 (factor -> variable .)
+    DO              reduce using rule 56 (factor -> variable .)
+    COMMA           reduce using rule 56 (factor -> variable .)
+    RPAREN          reduce using rule 56 (factor -> variable .)
+    SEMI            reduce using rule 56 (factor -> variable .)
+    END             reduce using rule 56 (factor -> variable .)
+    ELSE            reduce using rule 56 (factor -> variable .)
+    RSQUARE         reduce using rule 56 (factor -> variable .)
+    TO              reduce using rule 56 (factor -> variable .)
+
+
+state 51
+
+    (57) factor -> TRUE .
+
+    GT              reduce using rule 57 (factor -> TRUE .)
+    LT              reduce using rule 57 (factor -> TRUE .)
+    GE              reduce using rule 57 (factor -> TRUE .)
+    LE              reduce using rule 57 (factor -> TRUE .)
+    EQ              reduce using rule 57 (factor -> TRUE .)
+    NE              reduce using rule 57 (factor -> TRUE .)
+    PLUS            reduce using rule 57 (factor -> TRUE .)
+    MINUS           reduce using rule 57 (factor -> TRUE .)
+    MULT            reduce using rule 57 (factor -> TRUE .)
+    DIV             reduce using rule 57 (factor -> TRUE .)
+    MOD             reduce using rule 57 (factor -> TRUE .)
+    THEN            reduce using rule 57 (factor -> TRUE .)
+    AND             reduce using rule 57 (factor -> TRUE .)
+    OR              reduce using rule 57 (factor -> TRUE .)
+    DO              reduce using rule 57 (factor -> TRUE .)
+    COMMA           reduce using rule 57 (factor -> TRUE .)
+    RPAREN          reduce using rule 57 (factor -> TRUE .)
+    SEMI            reduce using rule 57 (factor -> TRUE .)
+    END             reduce using rule 57 (factor -> TRUE .)
+    ELSE            reduce using rule 57 (factor -> TRUE .)
+    RSQUARE         reduce using rule 57 (factor -> TRUE .)
+    TO              reduce using rule 57 (factor -> TRUE .)
+
+
+state 52
+
+    (58) factor -> FALSE .
+
+    GT              reduce using rule 58 (factor -> FALSE .)
+    LT              reduce using rule 58 (factor -> FALSE .)
+    GE              reduce using rule 58 (factor -> FALSE .)
+    LE              reduce using rule 58 (factor -> FALSE .)
+    EQ              reduce using rule 58 (factor -> FALSE .)
+    NE              reduce using rule 58 (factor -> FALSE .)
+    PLUS            reduce using rule 58 (factor -> FALSE .)
+    MINUS           reduce using rule 58 (factor -> FALSE .)
+    MULT            reduce using rule 58 (factor -> FALSE .)
+    DIV             reduce using rule 58 (factor -> FALSE .)
+    MOD             reduce using rule 58 (factor -> FALSE .)
+    THEN            reduce using rule 58 (factor -> FALSE .)
+    AND             reduce using rule 58 (factor -> FALSE .)
+    OR              reduce using rule 58 (factor -> FALSE .)
+    DO              reduce using rule 58 (factor -> FALSE .)
+    COMMA           reduce using rule 58 (factor -> FALSE .)
+    RPAREN          reduce using rule 58 (factor -> FALSE .)
+    SEMI            reduce using rule 58 (factor -> FALSE .)
+    END             reduce using rule 58 (factor -> FALSE .)
+    ELSE            reduce using rule 58 (factor -> FALSE .)
+    RSQUARE         reduce using rule 58 (factor -> FALSE .)
+    TO              reduce using rule 58 (factor -> FALSE .)
+
+
+state 53
+
+    (39) while_loop -> WHILE condition . DO statement
+    (59) condition -> condition . AND condition
+    (60) condition -> condition . OR condition
+
+    DO              shift and go to state 87
+    AND             shift and go to state 72
+    OR              shift and go to state 73
+
+
+state 54
+
+    (7) var_declaration_list_nonempty -> var_declaration SEMI .
+    (8) var_declaration_list_nonempty -> var_declaration SEMI . var_declaration_list_nonempty
+    (7) var_declaration_list_nonempty -> . var_declaration SEMI
+    (8) var_declaration_list_nonempty -> . var_declaration SEMI var_declaration_list_nonempty
+    (9) var_declaration -> . id_list COLON type
+    (15) id_list -> . ID
+    (16) id_list -> . ID COMMA id_list
+
+    BEGIN           reduce using rule 7 (var_declaration_list_nonempty -> var_declaration SEMI .)
+    ID              shift and go to state 35
+
+    var_declaration                shift and go to state 33
+    var_declaration_list_nonempty  shift and go to state 88
+    id_list                        shift and go to state 34
+
+state 55
+
+    (9) var_declaration -> id_list COLON . type
+    (10) type -> . basic_type
+    (11) type -> . array_type
+    (12) basic_type -> . INTEGER
+    (13) basic_type -> . BOOLEAN
+    (14) array_type -> . ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF type
+
+    INTEGER         shift and go to state 92
+    BOOLEAN         shift and go to state 93
+    ARRAY           shift and go to state 94
+
+    type                           shift and go to state 89
+    basic_type                     shift and go to state 90
+    array_type                     shift and go to state 91
+
+state 56
+
+    (16) id_list -> ID COMMA . id_list
+    (15) id_list -> . ID
+    (16) id_list -> . ID COMMA id_list
+
+    ID              shift and go to state 35
+
+    id_list                        shift and go to state 95
+
+state 57
+
+    (2) block -> declarations BEGIN statements_body END .
+
+    DOT             reduce using rule 2 (block -> declarations BEGIN statements_body END .)
+    SEMI            reduce using rule 2 (block -> declarations BEGIN statements_body END .)
+    END             reduce using rule 2 (block -> declarations BEGIN statements_body END .)
+    ELSE            reduce using rule 2 (block -> declarations BEGIN statements_body END .)
+
+
+state 58
+
+    (20) statement_sequence -> statement SEMI statement_sequence .
+
+    END             reduce using rule 20 (statement_sequence -> statement SEMI statement_sequence .)
+
+
+state 59
+
+    (30) statement -> empty_stmt_node .
+
+    SEMI            reduce using rule 30 (statement -> empty_stmt_node .)
+    END             reduce using rule 30 (statement -> empty_stmt_node .)
+    ELSE            reduce using rule 30 (statement -> empty_stmt_node .)
+
+
+state 60
+
+    (53) expression -> LPAREN . expression RPAREN
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 96
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 61
+
+    (31) writeln_stmt -> WRITELN LPAREN expr_list . RPAREN
+
+    RPAREN          shift and go to state 97
+
+
+state 62
+
+    (44) expr_list -> expr .
+    (45) expr_list -> expr . COMMA expr_list
+
+    RPAREN          reduce using rule 44 (expr_list -> expr .)
+    COMMA           shift and go to state 98
+
+
+state 63
+
+    (46) expr -> STRING_LITERAL .
+
+    COMMA           reduce using rule 46 (expr -> STRING_LITERAL .)
+    RPAREN          reduce using rule 46 (expr -> STRING_LITERAL .)
+
+
+state 64
+
+    (47) expr -> expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    COMMA           reduce using rule 47 (expr -> expression .)
+    RPAREN          reduce using rule 47 (expr -> expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 65
+
+    (32) write_stmt -> WRITE LPAREN expr_list . RPAREN
+
+    RPAREN          shift and go to state 99
+
+
+state 66
+
+    (33) readln_stmt -> READLN LPAREN variable_list . RPAREN
+
+    RPAREN          shift and go to state 100
+
+
+state 67
+
+    (42) variable_list -> variable .
+    (43) variable_list -> variable . COMMA variable_list
+
+    RPAREN          reduce using rule 42 (variable_list -> variable .)
+    COMMA           shift and go to state 101
+
+
+state 68
+
+    (34) assign_stmt -> variable ASSIGN expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    SEMI            reduce using rule 34 (assign_stmt -> variable ASSIGN expression .)
+    END             reduce using rule 34 (assign_stmt -> variable ASSIGN expression .)
+    ELSE            reduce using rule 34 (assign_stmt -> variable ASSIGN expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 69
+
+    (35) for_loop -> FOR ID ASSIGN . expression TO expression DO statement
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 102
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 70
+
+    (41) variable -> ID LSQUARE expression . RSQUARE
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    RSQUARE         shift and go to state 103
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 71
+
+    (36) if_stmt -> IF condition THEN . statement else_clause
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (21) empty_stmt_node -> .
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    ELSE            reduce using rule 21 (empty_stmt_node -> .)
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    statement                      shift and go to state 104
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    empty_stmt_node                shift and go to state 59
+    variable                       shift and go to state 27
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 72
+
+    (59) condition -> condition AND . condition
+    (59) condition -> . condition AND condition
+    (60) condition -> . condition OR condition
+    (61) condition -> . expression GT expression
+    (62) condition -> . expression LT expression
+    (63) condition -> . expression GE expression
+    (64) condition -> . expression LE expression
+    (65) condition -> . expression EQ expression
+    (66) condition -> . expression NE expression
+    (67) condition -> . LPAREN condition RPAREN
+    (68) condition -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    condition                      shift and go to state 105
+    expression                     shift and go to state 46
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 73
+
+    (60) condition -> condition OR . condition
+    (59) condition -> . condition AND condition
+    (60) condition -> . condition OR condition
+    (61) condition -> . expression GT expression
+    (62) condition -> . expression LT expression
+    (63) condition -> . expression GE expression
+    (64) condition -> . expression LE expression
+    (65) condition -> . expression EQ expression
+    (66) condition -> . expression NE expression
+    (67) condition -> . LPAREN condition RPAREN
+    (68) condition -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 47
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    condition                      shift and go to state 106
+    expression                     shift and go to state 46
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 74
+
+    (61) condition -> expression GT . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 107
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 75
+
+    (62) condition -> expression LT . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 108
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 76
+
+    (63) condition -> expression GE . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 109
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 77
+
+    (64) condition -> expression LE . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 110
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 78
+
+    (65) condition -> expression EQ . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 111
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 79
+
+    (66) condition -> expression NE . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 112
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 80
+
+    (48) expression -> expression PLUS . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 113
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 81
+
+    (49) expression -> expression MINUS . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 114
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 82
+
+    (50) expression -> expression MULT . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 115
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 83
+
+    (51) expression -> expression DIV . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 116
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 84
+
+    (52) expression -> expression MOD . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 117
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 85
+
+    (67) condition -> LPAREN condition . RPAREN
+    (59) condition -> condition . AND condition
+    (60) condition -> condition . OR condition
+
+    RPAREN          shift and go to state 118
+    AND             shift and go to state 72
+    OR              shift and go to state 73
+
+
+state 86
+
+    (53) expression -> LPAREN expression . RPAREN
+    (61) condition -> expression . GT expression
+    (62) condition -> expression . LT expression
+    (63) condition -> expression . GE expression
+    (64) condition -> expression . LE expression
+    (65) condition -> expression . EQ expression
+    (66) condition -> expression . NE expression
+    (68) condition -> expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+  ! shift/reduce conflict for RPAREN resolved as shift
+    RPAREN          shift and go to state 119
+    GT              shift and go to state 74
+    LT              shift and go to state 75
+    GE              shift and go to state 76
+    LE              shift and go to state 77
+    EQ              shift and go to state 78
+    NE              shift and go to state 79
+    AND             reduce using rule 68 (condition -> expression .)
+    OR              reduce using rule 68 (condition -> expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+  ! RPAREN          [ reduce using rule 68 (condition -> expression .) ]
+
+
+state 87
+
+    (39) while_loop -> WHILE condition DO . statement
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (21) empty_stmt_node -> .
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    ELSE            reduce using rule 21 (empty_stmt_node -> .)
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    statement                      shift and go to state 120
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    empty_stmt_node                shift and go to state 59
+    variable                       shift and go to state 27
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 88
+
+    (8) var_declaration_list_nonempty -> var_declaration SEMI var_declaration_list_nonempty .
+
+    BEGIN           reduce using rule 8 (var_declaration_list_nonempty -> var_declaration SEMI var_declaration_list_nonempty .)
+
+
+state 89
+
+    (9) var_declaration -> id_list COLON type .
+
+    SEMI            reduce using rule 9 (var_declaration -> id_list COLON type .)
+
+
+state 90
+
+    (10) type -> basic_type .
+
+    SEMI            reduce using rule 10 (type -> basic_type .)
+
+
+state 91
+
+    (11) type -> array_type .
+
+    SEMI            reduce using rule 11 (type -> array_type .)
+
+
+state 92
+
+    (12) basic_type -> INTEGER .
+
+    SEMI            reduce using rule 12 (basic_type -> INTEGER .)
+
+
+state 93
+
+    (13) basic_type -> BOOLEAN .
+
+    SEMI            reduce using rule 13 (basic_type -> BOOLEAN .)
+
+
+state 94
+
+    (14) array_type -> ARRAY . LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF type
+
+    LSQUARE         shift and go to state 121
+
+
+state 95
+
+    (16) id_list -> ID COMMA id_list .
+
+    COLON           reduce using rule 16 (id_list -> ID COMMA id_list .)
+
+
+state 96
+
+    (53) expression -> LPAREN expression . RPAREN
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    RPAREN          shift and go to state 119
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 97
+
+    (31) writeln_stmt -> WRITELN LPAREN expr_list RPAREN .
+
+    SEMI            reduce using rule 31 (writeln_stmt -> WRITELN LPAREN expr_list RPAREN .)
+    END             reduce using rule 31 (writeln_stmt -> WRITELN LPAREN expr_list RPAREN .)
+    ELSE            reduce using rule 31 (writeln_stmt -> WRITELN LPAREN expr_list RPAREN .)
+
+
+state 98
+
+    (45) expr_list -> expr COMMA . expr_list
+    (44) expr_list -> . expr
+    (45) expr_list -> . expr COMMA expr_list
+    (46) expr -> . STRING_LITERAL
+    (47) expr -> . expression
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    STRING_LITERAL  shift and go to state 63
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expr                           shift and go to state 62
+    expr_list                      shift and go to state 122
+    expression                     shift and go to state 64
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 99
+
+    (32) write_stmt -> WRITE LPAREN expr_list RPAREN .
+
+    SEMI            reduce using rule 32 (write_stmt -> WRITE LPAREN expr_list RPAREN .)
+    END             reduce using rule 32 (write_stmt -> WRITE LPAREN expr_list RPAREN .)
+    ELSE            reduce using rule 32 (write_stmt -> WRITE LPAREN expr_list RPAREN .)
+
+
+state 100
+
+    (33) readln_stmt -> READLN LPAREN variable_list RPAREN .
+
+    SEMI            reduce using rule 33 (readln_stmt -> READLN LPAREN variable_list RPAREN .)
+    END             reduce using rule 33 (readln_stmt -> READLN LPAREN variable_list RPAREN .)
+    ELSE            reduce using rule 33 (readln_stmt -> READLN LPAREN variable_list RPAREN .)
+
+
+state 101
+
+    (43) variable_list -> variable COMMA . variable_list
+    (42) variable_list -> . variable
+    (43) variable_list -> . variable COMMA variable_list
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    ID              shift and go to state 29
+
+    variable                       shift and go to state 67
+    variable_list                  shift and go to state 123
+
+state 102
+
+    (35) for_loop -> FOR ID ASSIGN expression . TO expression DO statement
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    TO              shift and go to state 124
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 103
+
+    (41) variable -> ID LSQUARE expression RSQUARE .
+
+    ASSIGN          reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    GT              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    LT              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    GE              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    LE              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    EQ              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    NE              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    PLUS            reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    MINUS           reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    MULT            reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    DIV             reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    MOD             reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    THEN            reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    AND             reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    OR              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    DO              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    COMMA           reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    RPAREN          reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    SEMI            reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    END             reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    ELSE            reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    RSQUARE         reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+    TO              reduce using rule 41 (variable -> ID LSQUARE expression RSQUARE .)
+
+
+state 104
+
+    (36) if_stmt -> IF condition THEN statement . else_clause
+    (37) else_clause -> . ELSE statement
+    (38) else_clause -> . empty_stmt_node
+    (21) empty_stmt_node -> .
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ELSE            shift and go to state 126
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    END             reduce using rule 21 (empty_stmt_node -> .)
+
+  ! ELSE            [ reduce using rule 21 (empty_stmt_node -> .) ]
+
+    else_clause                    shift and go to state 125
+    empty_stmt_node                shift and go to state 127
+
+state 105
+
+    (59) condition -> condition AND condition .
+    (59) condition -> condition . AND condition
+    (60) condition -> condition . OR condition
+
+    THEN            reduce using rule 59 (condition -> condition AND condition .)
+    AND             reduce using rule 59 (condition -> condition AND condition .)
+    OR              reduce using rule 59 (condition -> condition AND condition .)
+    DO              reduce using rule 59 (condition -> condition AND condition .)
+    RPAREN          reduce using rule 59 (condition -> condition AND condition .)
+
+  ! AND             [ shift and go to state 72 ]
+  ! OR              [ shift and go to state 73 ]
+
+
+state 106
+
+    (60) condition -> condition OR condition .
+    (59) condition -> condition . AND condition
+    (60) condition -> condition . OR condition
+
+    THEN            reduce using rule 60 (condition -> condition OR condition .)
+    OR              reduce using rule 60 (condition -> condition OR condition .)
+    DO              reduce using rule 60 (condition -> condition OR condition .)
+    RPAREN          reduce using rule 60 (condition -> condition OR condition .)
+    AND             shift and go to state 72
+
+  ! AND             [ reduce using rule 60 (condition -> condition OR condition .) ]
+  ! OR              [ shift and go to state 73 ]
+
+
+state 107
+
+    (61) condition -> expression GT expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    THEN            reduce using rule 61 (condition -> expression GT expression .)
+    AND             reduce using rule 61 (condition -> expression GT expression .)
+    OR              reduce using rule 61 (condition -> expression GT expression .)
+    DO              reduce using rule 61 (condition -> expression GT expression .)
+    RPAREN          reduce using rule 61 (condition -> expression GT expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 108
+
+    (62) condition -> expression LT expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    THEN            reduce using rule 62 (condition -> expression LT expression .)
+    AND             reduce using rule 62 (condition -> expression LT expression .)
+    OR              reduce using rule 62 (condition -> expression LT expression .)
+    DO              reduce using rule 62 (condition -> expression LT expression .)
+    RPAREN          reduce using rule 62 (condition -> expression LT expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 109
+
+    (63) condition -> expression GE expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    THEN            reduce using rule 63 (condition -> expression GE expression .)
+    AND             reduce using rule 63 (condition -> expression GE expression .)
+    OR              reduce using rule 63 (condition -> expression GE expression .)
+    DO              reduce using rule 63 (condition -> expression GE expression .)
+    RPAREN          reduce using rule 63 (condition -> expression GE expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 110
+
+    (64) condition -> expression LE expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    THEN            reduce using rule 64 (condition -> expression LE expression .)
+    AND             reduce using rule 64 (condition -> expression LE expression .)
+    OR              reduce using rule 64 (condition -> expression LE expression .)
+    DO              reduce using rule 64 (condition -> expression LE expression .)
+    RPAREN          reduce using rule 64 (condition -> expression LE expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 111
+
+    (65) condition -> expression EQ expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    THEN            reduce using rule 65 (condition -> expression EQ expression .)
+    AND             reduce using rule 65 (condition -> expression EQ expression .)
+    OR              reduce using rule 65 (condition -> expression EQ expression .)
+    DO              reduce using rule 65 (condition -> expression EQ expression .)
+    RPAREN          reduce using rule 65 (condition -> expression EQ expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 112
+
+    (66) condition -> expression NE expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    THEN            reduce using rule 66 (condition -> expression NE expression .)
+    AND             reduce using rule 66 (condition -> expression NE expression .)
+    OR              reduce using rule 66 (condition -> expression NE expression .)
+    DO              reduce using rule 66 (condition -> expression NE expression .)
+    RPAREN          reduce using rule 66 (condition -> expression NE expression .)
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 113
+
+    (48) expression -> expression PLUS expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    GT              reduce using rule 48 (expression -> expression PLUS expression .)
+    LT              reduce using rule 48 (expression -> expression PLUS expression .)
+    GE              reduce using rule 48 (expression -> expression PLUS expression .)
+    LE              reduce using rule 48 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 48 (expression -> expression PLUS expression .)
+    NE              reduce using rule 48 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 48 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 48 (expression -> expression PLUS expression .)
+    THEN            reduce using rule 48 (expression -> expression PLUS expression .)
+    AND             reduce using rule 48 (expression -> expression PLUS expression .)
+    OR              reduce using rule 48 (expression -> expression PLUS expression .)
+    DO              reduce using rule 48 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 48 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 48 (expression -> expression PLUS expression .)
+    SEMI            reduce using rule 48 (expression -> expression PLUS expression .)
+    END             reduce using rule 48 (expression -> expression PLUS expression .)
+    ELSE            reduce using rule 48 (expression -> expression PLUS expression .)
+    RSQUARE         reduce using rule 48 (expression -> expression PLUS expression .)
+    TO              reduce using rule 48 (expression -> expression PLUS expression .)
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+  ! MULT            [ reduce using rule 48 (expression -> expression PLUS expression .) ]
+  ! DIV             [ reduce using rule 48 (expression -> expression PLUS expression .) ]
+  ! MOD             [ reduce using rule 48 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+
+
+state 114
+
+    (49) expression -> expression MINUS expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    GT              reduce using rule 49 (expression -> expression MINUS expression .)
+    LT              reduce using rule 49 (expression -> expression MINUS expression .)
+    GE              reduce using rule 49 (expression -> expression MINUS expression .)
+    LE              reduce using rule 49 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 49 (expression -> expression MINUS expression .)
+    NE              reduce using rule 49 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 49 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 49 (expression -> expression MINUS expression .)
+    THEN            reduce using rule 49 (expression -> expression MINUS expression .)
+    AND             reduce using rule 49 (expression -> expression MINUS expression .)
+    OR              reduce using rule 49 (expression -> expression MINUS expression .)
+    DO              reduce using rule 49 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 49 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 49 (expression -> expression MINUS expression .)
+    SEMI            reduce using rule 49 (expression -> expression MINUS expression .)
+    END             reduce using rule 49 (expression -> expression MINUS expression .)
+    ELSE            reduce using rule 49 (expression -> expression MINUS expression .)
+    RSQUARE         reduce using rule 49 (expression -> expression MINUS expression .)
+    TO              reduce using rule 49 (expression -> expression MINUS expression .)
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+  ! MULT            [ reduce using rule 49 (expression -> expression MINUS expression .) ]
+  ! DIV             [ reduce using rule 49 (expression -> expression MINUS expression .) ]
+  ! MOD             [ reduce using rule 49 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+
+
+state 115
+
+    (50) expression -> expression MULT expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    GT              reduce using rule 50 (expression -> expression MULT expression .)
+    LT              reduce using rule 50 (expression -> expression MULT expression .)
+    GE              reduce using rule 50 (expression -> expression MULT expression .)
+    LE              reduce using rule 50 (expression -> expression MULT expression .)
+    EQ              reduce using rule 50 (expression -> expression MULT expression .)
+    NE              reduce using rule 50 (expression -> expression MULT expression .)
+    PLUS            reduce using rule 50 (expression -> expression MULT expression .)
+    MINUS           reduce using rule 50 (expression -> expression MULT expression .)
+    MULT            reduce using rule 50 (expression -> expression MULT expression .)
+    DIV             reduce using rule 50 (expression -> expression MULT expression .)
+    MOD             reduce using rule 50 (expression -> expression MULT expression .)
+    THEN            reduce using rule 50 (expression -> expression MULT expression .)
+    AND             reduce using rule 50 (expression -> expression MULT expression .)
+    OR              reduce using rule 50 (expression -> expression MULT expression .)
+    DO              reduce using rule 50 (expression -> expression MULT expression .)
+    COMMA           reduce using rule 50 (expression -> expression MULT expression .)
+    RPAREN          reduce using rule 50 (expression -> expression MULT expression .)
+    SEMI            reduce using rule 50 (expression -> expression MULT expression .)
+    END             reduce using rule 50 (expression -> expression MULT expression .)
+    ELSE            reduce using rule 50 (expression -> expression MULT expression .)
+    RSQUARE         reduce using rule 50 (expression -> expression MULT expression .)
+    TO              reduce using rule 50 (expression -> expression MULT expression .)
+
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+  ! MULT            [ shift and go to state 82 ]
+  ! DIV             [ shift and go to state 83 ]
+  ! MOD             [ shift and go to state 84 ]
+
+
+state 116
+
+    (51) expression -> expression DIV expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    GT              reduce using rule 51 (expression -> expression DIV expression .)
+    LT              reduce using rule 51 (expression -> expression DIV expression .)
+    GE              reduce using rule 51 (expression -> expression DIV expression .)
+    LE              reduce using rule 51 (expression -> expression DIV expression .)
+    EQ              reduce using rule 51 (expression -> expression DIV expression .)
+    NE              reduce using rule 51 (expression -> expression DIV expression .)
+    PLUS            reduce using rule 51 (expression -> expression DIV expression .)
+    MINUS           reduce using rule 51 (expression -> expression DIV expression .)
+    MULT            reduce using rule 51 (expression -> expression DIV expression .)
+    DIV             reduce using rule 51 (expression -> expression DIV expression .)
+    MOD             reduce using rule 51 (expression -> expression DIV expression .)
+    THEN            reduce using rule 51 (expression -> expression DIV expression .)
+    AND             reduce using rule 51 (expression -> expression DIV expression .)
+    OR              reduce using rule 51 (expression -> expression DIV expression .)
+    DO              reduce using rule 51 (expression -> expression DIV expression .)
+    COMMA           reduce using rule 51 (expression -> expression DIV expression .)
+    RPAREN          reduce using rule 51 (expression -> expression DIV expression .)
+    SEMI            reduce using rule 51 (expression -> expression DIV expression .)
+    END             reduce using rule 51 (expression -> expression DIV expression .)
+    ELSE            reduce using rule 51 (expression -> expression DIV expression .)
+    RSQUARE         reduce using rule 51 (expression -> expression DIV expression .)
+    TO              reduce using rule 51 (expression -> expression DIV expression .)
+
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+  ! MULT            [ shift and go to state 82 ]
+  ! DIV             [ shift and go to state 83 ]
+  ! MOD             [ shift and go to state 84 ]
+
+
+state 117
+
+    (52) expression -> expression MOD expression .
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    GT              reduce using rule 52 (expression -> expression MOD expression .)
+    LT              reduce using rule 52 (expression -> expression MOD expression .)
+    GE              reduce using rule 52 (expression -> expression MOD expression .)
+    LE              reduce using rule 52 (expression -> expression MOD expression .)
+    EQ              reduce using rule 52 (expression -> expression MOD expression .)
+    NE              reduce using rule 52 (expression -> expression MOD expression .)
+    PLUS            reduce using rule 52 (expression -> expression MOD expression .)
+    MINUS           reduce using rule 52 (expression -> expression MOD expression .)
+    MULT            reduce using rule 52 (expression -> expression MOD expression .)
+    DIV             reduce using rule 52 (expression -> expression MOD expression .)
+    MOD             reduce using rule 52 (expression -> expression MOD expression .)
+    THEN            reduce using rule 52 (expression -> expression MOD expression .)
+    AND             reduce using rule 52 (expression -> expression MOD expression .)
+    OR              reduce using rule 52 (expression -> expression MOD expression .)
+    DO              reduce using rule 52 (expression -> expression MOD expression .)
+    COMMA           reduce using rule 52 (expression -> expression MOD expression .)
+    RPAREN          reduce using rule 52 (expression -> expression MOD expression .)
+    SEMI            reduce using rule 52 (expression -> expression MOD expression .)
+    END             reduce using rule 52 (expression -> expression MOD expression .)
+    ELSE            reduce using rule 52 (expression -> expression MOD expression .)
+    RSQUARE         reduce using rule 52 (expression -> expression MOD expression .)
+    TO              reduce using rule 52 (expression -> expression MOD expression .)
+
+  ! PLUS            [ shift and go to state 80 ]
+  ! MINUS           [ shift and go to state 81 ]
+  ! MULT            [ shift and go to state 82 ]
+  ! DIV             [ shift and go to state 83 ]
+  ! MOD             [ shift and go to state 84 ]
+
+
+state 118
+
+    (67) condition -> LPAREN condition RPAREN .
+
+    THEN            reduce using rule 67 (condition -> LPAREN condition RPAREN .)
+    AND             reduce using rule 67 (condition -> LPAREN condition RPAREN .)
+    OR              reduce using rule 67 (condition -> LPAREN condition RPAREN .)
+    DO              reduce using rule 67 (condition -> LPAREN condition RPAREN .)
+    RPAREN          reduce using rule 67 (condition -> LPAREN condition RPAREN .)
+
+
+state 119
+
+    (53) expression -> LPAREN expression RPAREN .
+
+    GT              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    LT              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    GE              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    LE              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    NE              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    MULT            reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    DIV             reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    MOD             reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    DO              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    COMMA           reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    SEMI            reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    END             reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    ELSE            reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    RSQUARE         reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+    TO              reduce using rule 53 (expression -> LPAREN expression RPAREN .)
+
+
+state 120
+
+    (39) while_loop -> WHILE condition DO statement .
+
+    SEMI            reduce using rule 39 (while_loop -> WHILE condition DO statement .)
+    END             reduce using rule 39 (while_loop -> WHILE condition DO statement .)
+    ELSE            reduce using rule 39 (while_loop -> WHILE condition DO statement .)
+
+
+state 121
+
+    (14) array_type -> ARRAY LSQUARE . NUMBER DOTDOT NUMBER RSQUARE OF type
+
+    NUMBER          shift and go to state 128
+
+
+state 122
+
+    (45) expr_list -> expr COMMA expr_list .
+
+    RPAREN          reduce using rule 45 (expr_list -> expr COMMA expr_list .)
+
+
+state 123
+
+    (43) variable_list -> variable COMMA variable_list .
+
+    RPAREN          reduce using rule 43 (variable_list -> variable COMMA variable_list .)
+
+
+state 124
+
+    (35) for_loop -> FOR ID ASSIGN expression TO . expression DO statement
+    (48) expression -> . expression PLUS expression
+    (49) expression -> . expression MINUS expression
+    (50) expression -> . expression MULT expression
+    (51) expression -> . expression DIV expression
+    (52) expression -> . expression MOD expression
+    (53) expression -> . LPAREN expression RPAREN
+    (54) expression -> . factor
+    (55) factor -> . NUMBER
+    (56) factor -> . variable
+    (57) factor -> . TRUE
+    (58) factor -> . FALSE
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+
+    LPAREN          shift and go to state 60
+    NUMBER          shift and go to state 49
+    TRUE            shift and go to state 51
+    FALSE           shift and go to state 52
+    ID              shift and go to state 29
+
+    expression                     shift and go to state 129
+    factor                         shift and go to state 48
+    variable                       shift and go to state 50
+
+state 125
+
+    (36) if_stmt -> IF condition THEN statement else_clause .
+
+    SEMI            reduce using rule 36 (if_stmt -> IF condition THEN statement else_clause .)
+    END             reduce using rule 36 (if_stmt -> IF condition THEN statement else_clause .)
+    ELSE            reduce using rule 36 (if_stmt -> IF condition THEN statement else_clause .)
+
+
+state 126
+
+    (37) else_clause -> ELSE . statement
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (21) empty_stmt_node -> .
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    ELSE            reduce using rule 21 (empty_stmt_node -> .)
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    statement                      shift and go to state 130
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    empty_stmt_node                shift and go to state 59
+    variable                       shift and go to state 27
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 127
+
+    (38) else_clause -> empty_stmt_node .
+
+    ELSE            reduce using rule 38 (else_clause -> empty_stmt_node .)
+    SEMI            reduce using rule 38 (else_clause -> empty_stmt_node .)
+    END             reduce using rule 38 (else_clause -> empty_stmt_node .)
+
+
+state 128
+
+    (14) array_type -> ARRAY LSQUARE NUMBER . DOTDOT NUMBER RSQUARE OF type
+
+    DOTDOT          shift and go to state 131
+
+
+state 129
+
+    (35) for_loop -> FOR ID ASSIGN expression TO expression . DO statement
+    (48) expression -> expression . PLUS expression
+    (49) expression -> expression . MINUS expression
+    (50) expression -> expression . MULT expression
+    (51) expression -> expression . DIV expression
+    (52) expression -> expression . MOD expression
+
+    DO              shift and go to state 132
+    PLUS            shift and go to state 80
+    MINUS           shift and go to state 81
+    MULT            shift and go to state 82
+    DIV             shift and go to state 83
+    MOD             shift and go to state 84
+
+
+state 130
+
+    (37) else_clause -> ELSE statement .
+
+    ELSE            reduce using rule 37 (else_clause -> ELSE statement .)
+    SEMI            reduce using rule 37 (else_clause -> ELSE statement .)
+    END             reduce using rule 37 (else_clause -> ELSE statement .)
+
+
+state 131
+
+    (14) array_type -> ARRAY LSQUARE NUMBER DOTDOT . NUMBER RSQUARE OF type
+
+    NUMBER          shift and go to state 133
+
+
+state 132
+
+    (35) for_loop -> FOR ID ASSIGN expression TO expression DO . statement
+    (22) statement -> . writeln_stmt
+    (23) statement -> . write_stmt
+    (24) statement -> . readln_stmt
+    (25) statement -> . assign_stmt
+    (26) statement -> . for_loop
+    (27) statement -> . if_stmt
+    (28) statement -> . while_loop
+    (29) statement -> . block
+    (30) statement -> . empty_stmt_node
+    (31) writeln_stmt -> . WRITELN LPAREN expr_list RPAREN
+    (32) write_stmt -> . WRITE LPAREN expr_list RPAREN
+    (33) readln_stmt -> . READLN LPAREN variable_list RPAREN
+    (34) assign_stmt -> . variable ASSIGN expression
+    (35) for_loop -> . FOR ID ASSIGN expression TO expression DO statement
+    (36) if_stmt -> . IF condition THEN statement else_clause
+    (39) while_loop -> . WHILE condition DO statement
+    (2) block -> . declarations BEGIN statements_body END
+    (3) block -> . BEGIN statements_body END
+    (21) empty_stmt_node -> .
+    (40) variable -> . ID
+    (41) variable -> . ID LSQUARE expression RSQUARE
+    (4) declarations -> . VAR var_declaration_list_nonempty
+    (5) declarations -> . empty_decl_tag
+    (6) empty_decl_tag -> .
+
+  ! shift/reduce conflict for BEGIN resolved as shift
+    WRITELN         shift and go to state 24
+    WRITE           shift and go to state 25
+    READLN          shift and go to state 26
+    FOR             shift and go to state 28
+    IF              shift and go to state 30
+    WHILE           shift and go to state 31
+    BEGIN           shift and go to state 7
+    ELSE            reduce using rule 21 (empty_stmt_node -> .)
+    SEMI            reduce using rule 21 (empty_stmt_node -> .)
+    END             reduce using rule 21 (empty_stmt_node -> .)
+    ID              shift and go to state 29
+    VAR             shift and go to state 8
+
+  ! BEGIN           [ reduce using rule 6 (empty_decl_tag -> .) ]
+
+    statement                      shift and go to state 134
+    writeln_stmt                   shift and go to state 16
+    write_stmt                     shift and go to state 17
+    readln_stmt                    shift and go to state 18
+    assign_stmt                    shift and go to state 19
+    for_loop                       shift and go to state 20
+    if_stmt                        shift and go to state 21
+    while_loop                     shift and go to state 22
+    block                          shift and go to state 23
+    empty_stmt_node                shift and go to state 59
+    variable                       shift and go to state 27
+    declarations                   shift and go to state 6
+    empty_decl_tag                 shift and go to state 9
+
+state 133
+
+    (14) array_type -> ARRAY LSQUARE NUMBER DOTDOT NUMBER . RSQUARE OF type
+
+    RSQUARE         shift and go to state 135
+
+
+state 134
+
+    (35) for_loop -> FOR ID ASSIGN expression TO expression DO statement .
+
+    SEMI            reduce using rule 35 (for_loop -> FOR ID ASSIGN expression TO expression DO statement .)
+    END             reduce using rule 35 (for_loop -> FOR ID ASSIGN expression TO expression DO statement .)
+    ELSE            reduce using rule 35 (for_loop -> FOR ID ASSIGN expression TO expression DO statement .)
+
+
+state 135
+
+    (14) array_type -> ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE . OF type
+
+    OF              shift and go to state 136
+
+
+state 136
+
+    (14) array_type -> ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF . type
+    (10) type -> . basic_type
+    (11) type -> . array_type
+    (12) basic_type -> . INTEGER
+    (13) basic_type -> . BOOLEAN
+    (14) array_type -> . ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF type
+
+    INTEGER         shift and go to state 92
+    BOOLEAN         shift and go to state 93
+    ARRAY           shift and go to state 94
+
+    type                           shift and go to state 137
+    basic_type                     shift and go to state 90
+    array_type                     shift and go to state 91
+
+state 137
+
+    (14) array_type -> ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF type .
+
+    SEMI            reduce using rule 14 (array_type -> ARRAY LSQUARE NUMBER DOTDOT NUMBER RSQUARE OF type .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for BEGIN in state 4 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 7 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 11 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 38 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 71 resolved as shift
+WARNING: shift/reduce conflict for RPAREN in state 86 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 87 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 104 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 126 resolved as shift
+WARNING: shift/reduce conflict for BEGIN in state 132 resolved as shift
+WARNING: reduce/reduce conflict in state 14 resolved using rule (statements_body -> empty_stmt_node)
+WARNING: rejected rule (statement -> empty_stmt_node) in state 14

@@ -1,1 +1,1 @@
-El Proyecto resuelto del compilador Pacal.
+# Projeto-PL2025

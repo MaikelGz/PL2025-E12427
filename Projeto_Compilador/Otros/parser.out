@@ -1,0 +1,444 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMA
+    DIVIDE
+    DO
+    FUNCTION
+    MINUS
+    PLUS
+    PROCEDURE
+    TIMES
+    WHILE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM ID SEMICOLON block DOT
+Rule 2     block -> declarations compound_statement
+Rule 3     declarations -> VAR declarations_list
+Rule 4     declarations_list -> ID COLON type SEMICOLON declarations_list
+Rule 5     declarations_list -> ID COLON type SEMICOLON
+Rule 6     type -> INTEGER
+Rule 7     type -> REAL
+Rule 8     compound_statement -> BEGIN statement_list END
+Rule 9     statement_list -> statement SEMICOLON statement_list
+Rule 10    statement_list -> statement SEMICOLON
+Rule 11    statement -> ID ASSIGN expression
+Rule 12    statement -> IF expression THEN statement ELSE statement
+Rule 13    statement -> WRITE LPAREN expression RPAREN
+Rule 14    expression -> NUMBER
+Rule 15    expression -> ID
+Rule 16    expression -> STRING
+
+Terminals, with rules where they appear
+
+ASSIGN               : 11
+BEGIN                : 8
+COLON                : 4 5
+COMMA                : 
+DIVIDE               : 
+DO                   : 
+DOT                  : 1
+ELSE                 : 12
+END                  : 8
+FUNCTION             : 
+ID                   : 1 4 5 11 15
+IF                   : 12
+INTEGER              : 6
+LPAREN               : 13
+MINUS                : 
+NUMBER               : 14
+PLUS                 : 
+PROCEDURE            : 
+PROGRAM              : 1
+REAL                 : 7
+RPAREN               : 13
+SEMICOLON            : 1 4 5 9 10
+STRING               : 16
+THEN                 : 12
+TIMES                : 
+VAR                  : 3
+WHILE                : 
+WRITE                : 13
+error                : 
+
+Nonterminals, with rules where they appear
+
+block                : 1
+compound_statement   : 2
+declarations         : 2
+declarations_list    : 3 4
+expression           : 11 12 13
+program              : 0
+statement            : 9 10 12 12
+statement_list       : 8 9
+type                 : 4 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM ID SEMICOLON block DOT
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . ID SEMICOLON block DOT
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) program -> PROGRAM ID . SEMICOLON block DOT
+
+    SEMICOLON       shift and go to state 4
+
+
+state 4
+
+    (1) program -> PROGRAM ID SEMICOLON . block DOT
+    (2) block -> . declarations compound_statement
+    (3) declarations -> . VAR declarations_list
+
+    VAR             shift and go to state 7
+
+    block                          shift and go to state 5
+    declarations                   shift and go to state 6
+
+state 5
+
+    (1) program -> PROGRAM ID SEMICOLON block . DOT
+
+    DOT             shift and go to state 8
+
+
+state 6
+
+    (2) block -> declarations . compound_statement
+    (8) compound_statement -> . BEGIN statement_list END
+
+    BEGIN           shift and go to state 10
+
+    compound_statement             shift and go to state 9
+
+state 7
+
+    (3) declarations -> VAR . declarations_list
+    (4) declarations_list -> . ID COLON type SEMICOLON declarations_list
+    (5) declarations_list -> . ID COLON type SEMICOLON
+
+    ID              shift and go to state 12
+
+    declarations_list              shift and go to state 11
+
+state 8
+
+    (1) program -> PROGRAM ID SEMICOLON block DOT .
+
+    $end            reduce using rule 1 (program -> PROGRAM ID SEMICOLON block DOT .)
+
+
+state 9
+
+    (2) block -> declarations compound_statement .
+
+    DOT             reduce using rule 2 (block -> declarations compound_statement .)
+
+
+state 10
+
+    (8) compound_statement -> BEGIN . statement_list END
+    (9) statement_list -> . statement SEMICOLON statement_list
+    (10) statement_list -> . statement SEMICOLON
+    (11) statement -> . ID ASSIGN expression
+    (12) statement -> . IF expression THEN statement ELSE statement
+    (13) statement -> . WRITE LPAREN expression RPAREN
+
+    ID              shift and go to state 15
+    IF              shift and go to state 16
+    WRITE           shift and go to state 17
+
+    statement_list                 shift and go to state 13
+    statement                      shift and go to state 14
+
+state 11
+
+    (3) declarations -> VAR declarations_list .
+
+    BEGIN           reduce using rule 3 (declarations -> VAR declarations_list .)
+
+
+state 12
+
+    (4) declarations_list -> ID . COLON type SEMICOLON declarations_list
+    (5) declarations_list -> ID . COLON type SEMICOLON
+
+    COLON           shift and go to state 18
+
+
+state 13
+
+    (8) compound_statement -> BEGIN statement_list . END
+
+    END             shift and go to state 19
+
+
+state 14
+
+    (9) statement_list -> statement . SEMICOLON statement_list
+    (10) statement_list -> statement . SEMICOLON
+
+    SEMICOLON       shift and go to state 20
+
+
+state 15
+
+    (11) statement -> ID . ASSIGN expression
+
+    ASSIGN          shift and go to state 21
+
+
+state 16
+
+    (12) statement -> IF . expression THEN statement ELSE statement
+    (14) expression -> . NUMBER
+    (15) expression -> . ID
+    (16) expression -> . STRING
+
+    NUMBER          shift and go to state 23
+    ID              shift and go to state 24
+    STRING          shift and go to state 25
+
+    expression                     shift and go to state 22
+
+state 17
+
+    (13) statement -> WRITE . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 26
+
+
+state 18
+
+    (4) declarations_list -> ID COLON . type SEMICOLON declarations_list
+    (5) declarations_list -> ID COLON . type SEMICOLON
+    (6) type -> . INTEGER
+    (7) type -> . REAL
+
+    INTEGER         shift and go to state 28
+    REAL            shift and go to state 29
+
+    type                           shift and go to state 27
+
+state 19
+
+    (8) compound_statement -> BEGIN statement_list END .
+
+    DOT             reduce using rule 8 (compound_statement -> BEGIN statement_list END .)
+
+
+state 20
+
+    (9) statement_list -> statement SEMICOLON . statement_list
+    (10) statement_list -> statement SEMICOLON .
+    (9) statement_list -> . statement SEMICOLON statement_list
+    (10) statement_list -> . statement SEMICOLON
+    (11) statement -> . ID ASSIGN expression
+    (12) statement -> . IF expression THEN statement ELSE statement
+    (13) statement -> . WRITE LPAREN expression RPAREN
+
+    END             reduce using rule 10 (statement_list -> statement SEMICOLON .)
+    ID              shift and go to state 15
+    IF              shift and go to state 16
+    WRITE           shift and go to state 17
+
+    statement                      shift and go to state 14
+    statement_list                 shift and go to state 30
+
+state 21
+
+    (11) statement -> ID ASSIGN . expression
+    (14) expression -> . NUMBER
+    (15) expression -> . ID
+    (16) expression -> . STRING
+
+    NUMBER          shift and go to state 23
+    ID              shift and go to state 24
+    STRING          shift and go to state 25
+
+    expression                     shift and go to state 31
+
+state 22
+
+    (12) statement -> IF expression . THEN statement ELSE statement
+
+    THEN            shift and go to state 32
+
+
+state 23
+
+    (14) expression -> NUMBER .
+
+    THEN            reduce using rule 14 (expression -> NUMBER .)
+    SEMICOLON       reduce using rule 14 (expression -> NUMBER .)
+    ELSE            reduce using rule 14 (expression -> NUMBER .)
+    RPAREN          reduce using rule 14 (expression -> NUMBER .)
+
+
+state 24
+
+    (15) expression -> ID .
+
+    THEN            reduce using rule 15 (expression -> ID .)
+    SEMICOLON       reduce using rule 15 (expression -> ID .)
+    ELSE            reduce using rule 15 (expression -> ID .)
+    RPAREN          reduce using rule 15 (expression -> ID .)
+
+
+state 25
+
+    (16) expression -> STRING .
+
+    THEN            reduce using rule 16 (expression -> STRING .)
+    SEMICOLON       reduce using rule 16 (expression -> STRING .)
+    ELSE            reduce using rule 16 (expression -> STRING .)
+    RPAREN          reduce using rule 16 (expression -> STRING .)
+
+
+state 26
+
+    (13) statement -> WRITE LPAREN . expression RPAREN
+    (14) expression -> . NUMBER
+    (15) expression -> . ID
+    (16) expression -> . STRING
+
+    NUMBER          shift and go to state 23
+    ID              shift and go to state 24
+    STRING          shift and go to state 25
+
+    expression                     shift and go to state 33
+
+state 27
+
+    (4) declarations_list -> ID COLON type . SEMICOLON declarations_list
+    (5) declarations_list -> ID COLON type . SEMICOLON
+
+    SEMICOLON       shift and go to state 34
+
+
+state 28
+
+    (6) type -> INTEGER .
+
+    SEMICOLON       reduce using rule 6 (type -> INTEGER .)
+
+
+state 29
+
+    (7) type -> REAL .
+
+    SEMICOLON       reduce using rule 7 (type -> REAL .)
+
+
+state 30
+
+    (9) statement_list -> statement SEMICOLON statement_list .
+
+    END             reduce using rule 9 (statement_list -> statement SEMICOLON statement_list .)
+
+
+state 31
+
+    (11) statement -> ID ASSIGN expression .
+
+    SEMICOLON       reduce using rule 11 (statement -> ID ASSIGN expression .)
+    ELSE            reduce using rule 11 (statement -> ID ASSIGN expression .)
+
+
+state 32
+
+    (12) statement -> IF expression THEN . statement ELSE statement
+    (11) statement -> . ID ASSIGN expression
+    (12) statement -> . IF expression THEN statement ELSE statement
+    (13) statement -> . WRITE LPAREN expression RPAREN
+
+    ID              shift and go to state 15
+    IF              shift and go to state 16
+    WRITE           shift and go to state 17
+
+    statement                      shift and go to state 35
+
+state 33
+
+    (13) statement -> WRITE LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 36
+
+
+state 34
+
+    (4) declarations_list -> ID COLON type SEMICOLON . declarations_list
+    (5) declarations_list -> ID COLON type SEMICOLON .
+    (4) declarations_list -> . ID COLON type SEMICOLON declarations_list
+    (5) declarations_list -> . ID COLON type SEMICOLON
+
+    BEGIN           reduce using rule 5 (declarations_list -> ID COLON type SEMICOLON .)
+    ID              shift and go to state 12
+
+    declarations_list              shift and go to state 37
+
+state 35
+
+    (12) statement -> IF expression THEN statement . ELSE statement
+
+    ELSE            shift and go to state 38
+
+
+state 36
+
+    (13) statement -> WRITE LPAREN expression RPAREN .
+
+    SEMICOLON       reduce using rule 13 (statement -> WRITE LPAREN expression RPAREN .)
+    ELSE            reduce using rule 13 (statement -> WRITE LPAREN expression RPAREN .)
+
+
+state 37
+
+    (4) declarations_list -> ID COLON type SEMICOLON declarations_list .
+
+    BEGIN           reduce using rule 4 (declarations_list -> ID COLON type SEMICOLON declarations_list .)
+
+
+state 38
+
+    (12) statement -> IF expression THEN statement ELSE . statement
+    (11) statement -> . ID ASSIGN expression
+    (12) statement -> . IF expression THEN statement ELSE statement
+    (13) statement -> . WRITE LPAREN expression RPAREN
+
+    ID              shift and go to state 15
+    IF              shift and go to state 16
+    WRITE           shift and go to state 17
+
+    statement                      shift and go to state 39
+
+state 39
+
+    (12) statement -> IF expression THEN statement ELSE statement .
+
+    SEMICOLON       reduce using rule 12 (statement -> IF expression THEN statement ELSE statement .)
+    ELSE            reduce using rule 12 (statement -> IF expression THEN statement ELSE statement .)
+
